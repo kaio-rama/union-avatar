@@ -18,11 +18,15 @@ export default function AssetCard({ path, category, currentCategory }: AssetCard
   const cameraRef = useRef(new THREE.PerspectiveCamera(25, 1, 0.1, 1000));
 
   useEffect(() => {
+
+    // this will crash the browser cuz too many webgl contexts
+    // https://webglfundamentals.org/webgl/lessons/webgl-multiple-views.html posible solution ?
+    
     if (!rendererRef.current) {
       rendererRef.current = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       rendererRef.current.setSize(150, 150);
     }
-
+    
     if (mountRef.current && !mountRef.current.contains(rendererRef.current.domElement)) {
       mountRef.current.appendChild(rendererRef.current.domElement);
     }
@@ -38,7 +42,6 @@ export default function AssetCard({ path, category, currentCategory }: AssetCard
     
         // Check if children[0] and children[0].children[0] exist before accessing the name
         // This is to handle the differents scales and positions for small elements
-
         if (model.children[0] && model.children[0].children[0]) {
           const name = model.children[0].children[0].name;
 
