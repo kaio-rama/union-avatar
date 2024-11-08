@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+}
+
+.ui-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: transparent;
+}
+
+button {
+    background-color: #555;
+    color: white;
+    height: 50px;
+    width: 150px;
+    cursor: pointer;
+}
+
+.interface-container {
+    display: flex;
+    flex-direction: row-reverse;
+    background: linear-gradient(
+        to bottom,
+        #421b6c,
+        #421b6f,   
+        #111312    
+      );
+}
+
+.asset-card {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #ddd;
+    margin: 5px;
+    background-color: #3333335c;
+}

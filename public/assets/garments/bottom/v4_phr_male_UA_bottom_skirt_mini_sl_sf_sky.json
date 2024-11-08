@@ -1,0 +1,29 @@
+{
+    "deployment_data": {
+        "source_type": "default",
+        "place": "body"
+    },
+    "metadata": {
+	"body": 
+		{
+			"UnionAvatars_Neck": true, 
+			"UnionAvatars_Chest": true,
+			"UnionAvatars_Belly": true,
+			"UnionAvatars_Hips": false,
+			"UnionAvatars_Arms_bottom": true, 
+			"UnionAvatars_Arms_top": true, 
+			"UnionAvatars_Hands": true, 
+			"UnionAvatars_Legs_bottom": true,
+			"UnionAvatars_Legs_top": true, 
+			"UnionAvatars_Feet": true
+		},
+	"version": "v4", 
+	"style": "phr", 
+	"gender": "male", 
+	"position": "bottom", 
+	"category": "short", 
+	"description": "skirt_mini_sky",
+	"dyeable": false,
+	"default_colors": [null]
+}
+}

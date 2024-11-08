@@ -1,0 +1,31 @@
+{
+    "deployment_data": {
+        "source_type": "default",
+        "place": "body"
+    },
+    "metadata": {
+        "body": {
+            "UnionAvatars_Neck": true,
+            "UnionAvatars_Chest": true,
+            "UnionAvatars_Belly": true,
+            "UnionAvatars_Hips": false,
+            "UnionAvatars_Arms_bottom": true,
+            "UnionAvatars_Arms_top": true,
+            "UnionAvatars_Hands": true,
+            "UnionAvatars_Legs_bottom": true,
+            "UnionAvatars_Legs_top": true,
+            "UnionAvatars_Feet_bottom": true,
+            "UnionAvatars_Feet_top": true
+        },
+        "version": "v3",
+        "style": "phr",
+        "gender": "male",
+        "position": "bottom",
+        "category": null,
+        "description": "pants_shorts_sl_black",
+        "dyeable": true,
+        "default_colors": [
+            null
+        ]
+    }
+}

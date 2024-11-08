@@ -1,0 +1,29 @@
+{
+    "deployment_data": {
+        "source_type": "default",
+        "place": "body"
+    },
+    "metadata": {
+		"body": 
+			{
+				"UnionAvatars_Neck": true, 
+				"UnionAvatars_Chest": false,
+				"UnionAvatars_Belly": false,
+				"UnionAvatars_Hips": true,
+				"UnionAvatars_Arms_bottom": true, 
+				"UnionAvatars_Arms_top": true, 
+				"UnionAvatars_Hands": true, 
+				"UnionAvatars_Legs_bottom": true,
+				"UnionAvatars_Legs_top": true, 
+				"UnionAvatars_Feet": true
+			},
+		"version": "v3", 
+		"style": "phr", 
+		"gender": "female", 
+		"position": "top", 
+		"category": null, 
+		"description": "shirt_basic_ss_white",
+		"dyeable": true,
+		"default_colors": [null]
+	}
+}
