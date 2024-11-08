@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef , useEffect} from 'react';
 import * as THREE from 'three';
 
 export const useRefs = () => {
@@ -7,7 +7,18 @@ export const useRefs = () => {
   const sceneRef = useRef<THREE.Scene | null>(null);
   const uiContainerRef = useRef<HTMLDivElement | null>(null);
   const mountRef = useRef<HTMLDivElement | null>(null);
-
+  
+  useEffect(() => {
+    if(!rendererRef.current){
+      rendererRef.current = new THREE.WebGLRenderer();
+    }
+    return () => {
+      if(rendererRef.current){
+        rendererRef.current.dispose();
+      }
+    };
+  }, []);
+  
   return { rendererRef, cameraRef, sceneRef, uiContainerRef, mountRef };
 };
 
