@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { useLoader } from '../hooks/useLoader';
 import { applyMetadata } from '../hooks/useMetadata';
-import { removeExistingAsset } from '../hooks/removeAsset';
 
 interface AssetProps {
   path: string;
@@ -14,6 +13,18 @@ interface AssetProps {
 const Asset: React.FC<AssetProps> = ({ path, avatarRef, scene, category }) => {
   const { glbLoader } = useLoader();
   const assetRef = useRef<THREE.Object3D | null>(null);
+
+  // Function to remove previous asset based on category
+  const removeExistingAsset = (
+    category: string,
+    avatar: THREE.Object3D | null
+  ) => {
+        if (!avatar) return;
+        if(avatar.children[avatar.children.length - 1].name === category) {
+          avatar.remove(avatar.children[avatar.children.length - 1]);
+          return;
+        }
+      }
 
   useEffect(() => {
     // Name of the file without extension
@@ -62,8 +73,12 @@ const Asset: React.FC<AssetProps> = ({ path, avatarRef, scene, category }) => {
 
     return () => {
       // Clean up the asset from the scene
-      if (assetRef.current && avatarRef.current) {        
-          avatarRef.current?.remove(assetRef.current);   
+      if (assetRef.current) {
+        if (avatarRef.current) {
+          avatarRef.current.remove(assetRef.current);
+        } else {
+          scene.remove(assetRef.current);
+        }
       }
     };
   }, [removeExistingAsset, applyMetadata, category, scene, assetRef, glbLoader, path]);
