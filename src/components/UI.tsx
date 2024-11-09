@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import useResizeHandler from '../hooks/useResizeHandler';
-import { useRefs } from '../hooks/useRefs';
 import AssetCard from './AssetCard';
 
 type GarmentsType = {
@@ -8,12 +6,9 @@ type GarmentsType = {
 };
 
 export default function UI() {
-  const { rendererRef, cameraRef } = useRefs();
   const [garments, setGarments] = useState<GarmentsType>({});
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [gender, setGender] = useState<'male' | 'female'>('female');
-
-  useResizeHandler({ rendererRef, cameraRef });
 
   // Load garments data from JSON file
   useEffect(() => {
@@ -48,7 +43,7 @@ export default function UI() {
         <div className="garments-container">
           {Object.entries(garments).map(([category, paths]) => (
             <div key={category} className="category">
-              <button onClick={() => toggleCategory(category)}>
+              <button id={category} onClick={() => toggleCategory(category)}>
                 {category}
               </button>
               {activeCategory === category && (
@@ -69,6 +64,9 @@ export default function UI() {
             </div>
           ))}
         </div>
+        <button id="download" className='download-button'>
+          Download
+        </button>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import Avatar from './Avatars';
 import useResizeHandler from '../hooks/useResizeHandler';
 import { useRefs } from '../hooks/useRefs';
 import { useAssetContext } from './AssetContext';
+import { GLTFExporter } from 'three/examples/jsm/Addons.js';
 
 function Scene() {
   const { rendererRef, cameraRef, mountRef } = useRefs();
@@ -33,7 +34,7 @@ function Scene() {
     const camera = new THREE.PerspectiveCamera(45, (window.innerWidth / 2) / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer();
     const controls = new OrbitControls(camera, renderer.domElement);
-    const floor = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.MeshStandardMaterial({ color: 0x21153a }));
+    const floor = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), new THREE.MeshStandardMaterial({ color: 0x21153a }));
 
     // Set up the scene 
     scene.background = new THREE.Color(0x421b6c);
@@ -79,9 +80,33 @@ function Scene() {
       });
     });
 
+    // Download the scene using GLTFExporter
+    document.getElementById('download')?.addEventListener('click', () => {
+      if (scene) {
+        // Exlude the floor from the scene
+        const floorClone = scene.getObjectByName('floor'); // O el nombre que hayas asignado al objeto floor
+        if (floorClone) {
+          scene.remove(floorClone);
+        }
+
+        const exporter = new GLTFExporter();
+        exporter.parse(scene, (result) => {
+          const output = JSON.stringify(result, null, 2);
+          const blob = new Blob([output], { type: 'application/octet-stream' });
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(blob);
+          link.download = 'unionAvatar.glb';
+          link.click();
+        }, { binary: true });
+        
+        if (floorClone) {   // Adding the floor back to the scene
+          scene.add(floorClone);
+        }
+      }
+    });
+
     // Clean up the scene when the component unmounts
     return () => {mountRef.current?.removeChild(renderer.domElement); console.log('Cleaning up the scene...')};
-
 
   }, [rendererRef, mountRef, cameraRef]);
 

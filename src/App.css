@@ -10,11 +10,12 @@ body {
 }
 
 button {
-    background-color: #555;
+    background-color: #323232cc ;
     color: white;
     height: 50px;
     width: 150px;
     cursor: pointer;
+    
 }
 
 .interface-container {
@@ -34,4 +35,20 @@ button {
     border: 1px solid #ddd;
     margin: 5px;
     background-color: #3333335c;
+}
+
+.download-button {
+    position: absolute;
+    bottom: 50px;
+    right: 80px;
+    background-color: #32ac3259;
+    color: white;
+    height: 50px;
+    width: 150px;
+    cursor: pointer;
+    border: none;
+}
+
+.download-button:hover {
+    background-color: #32ac3299;
 }
