@@ -5,27 +5,29 @@
           body: {
            [key: string]: boolean;
           };
-          gender: string;
+          position: string;
         };
       }
-
-   // Apply metadata if exists
-    export const applyMetadata = (avatar: THREE.Object3D, metadata: AssetMetadata) => {
-        // Traverse through the avatar object and apply the metadata
+      
+      export const applyMetadata = (avatar: THREE.Object3D, metadata: AssetMetadata) => {
+        const { position, body } = metadata.metadata;
+        const topParts = ["UnionAvatars_Neck", "UnionAvatars_Chest", "UnionAvatars_Belly", "UnionAvatars_Arms_bottom", "UnionAvatars_Arms_top", "UnionAvatars_Hands"];
+        const bottomParts = ["UnionAvatars_Legs_bottom", "UnionAvatars_Legs_top", "UnionAvatars_Hips"];
+        const shoesParts = ["UnionAvatars_Feet"];
+      
         avatar.traverse((child) => {
-          if (child.isMesh) {
-            const meshName = child.name.toLowerCase();
-  
-            // Get the body parts from the metadata
-            const bodyParts = metadata.metadata.body || {};
-  
-            // Loop through the body parts and adjust visibility on the avatar
-            Object.keys(bodyParts).forEach((part) => {
-              if (meshName.includes(part.toLowerCase())) {
-                // Set visibility based on metadata for body parts
-                child.visible = bodyParts[part];
-              }
-            });
+          if (child) {
+            const meshName = child.name;
+      
+            // Cheks the position of the asset and sets the visibility of the meshes
+            if (position === 'top' && topParts.includes(meshName)) {
+              child.visible = body[meshName] !== undefined ? body[meshName] : child.visible;
+            } else if (position === 'bottom' && bottomParts.includes(meshName)) {
+              child.visible = body[meshName] !== undefined ? body[meshName] : child.visible;
+            } else if (position === 'shoes' && shoesParts.includes(meshName)) {
+              child.visible = body[meshName] !== undefined ? body[meshName] : child.visible;
+            }
           }
         });
       };
+      

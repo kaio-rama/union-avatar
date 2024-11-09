@@ -11,6 +11,7 @@ export default function UI() {
   const { rendererRef, cameraRef } = useRefs();
   const [garments, setGarments] = useState<GarmentsType>({});
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [gender, setGender] = useState<'male' | 'female'>('female');
 
   useResizeHandler({ rendererRef, cameraRef });
 
@@ -31,18 +32,19 @@ export default function UI() {
   // Toggle category
   const toggleCategory = (category: string) => {
     setActiveCategory((prev) => (prev === category ? null : category));
-    console.log( "active category ", activeCategory, category);
-    
   };
 
-// create one canvas for each category
-
+  // Set gender if changing Avatar
+  const handleGenderChange = (selectedGender: 'male' | 'female') => {
+    setGender(selectedGender);
+  };
   return (
     <div style={{ display: 'flex', width: '100%', height: '100vh' }}>
       <div className="ui-container" style={{ width: '50%', padding: '10px', overflowY: 'auto' }}>
-        <button id="mujer">Mujer</button>
-        <button id="hombre">Hombre</button>
+        <button id="mujer" onClick={() => handleGenderChange('female')}>Mujer</button>
+        <button id="hombre" onClick={() => handleGenderChange('male')}>Hombre</button>
 
+        {/* category container */}
         <div className="garments-container">
           {Object.entries(garments).map(([category, paths]) => (
             <div key={category} className="category">
@@ -51,14 +53,17 @@ export default function UI() {
               </button>
               {activeCategory === category && (
                 <div className="subcategory-cards" style={{ display: 'flex', flexWrap: 'wrap' }}>
-                  {paths.map((path) => (
-                    <AssetCard
-                      key={path}
-                      path={path}
-                      category={category}
-                      currentCategory={activeCategory!}
-                    />
-                  ))}
+                  {paths
+                     // cheks if the path is for the current gender ( or if it is a hair category )
+                    .filter((path) => path.split('/')[4].split('_')[2] === gender || path.split('/')[3] === 'hair')
+                    .map((path) => (
+                      <AssetCard
+                        key={path}
+                        path={path}
+                        category={category}
+                        currentCategory={activeCategory!}
+                      />
+                    ))}
                 </div>
               )}
             </div>

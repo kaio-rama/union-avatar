@@ -14,7 +14,6 @@ const Avatar: React.FC<AvatarProps> = ({ modelPaths, assetPaths, scene }) => {
   const { glbLoader } = useLoader();;
 
   useEffect(() => {  
-
     // Clean up the previous avatar before loading a new one
     if (avatarRef.current) {
       scene.remove(avatarRef.current);
@@ -44,13 +43,13 @@ const Avatar: React.FC<AvatarProps> = ({ modelPaths, assetPaths, scene }) => {
             }
           },
           undefined,
-          (error) => {
+          (error) => {    // Hnding error loading the head model
             console.error('Error al cargar la cabeza:', error);
           }
         );
       },
       undefined,
-      (error) => {
+      (error) => {        // Handling error loading the body model
         console.error('Error al cargar el cuerpo:', error);
       }
     );
@@ -63,7 +62,6 @@ const Avatar: React.FC<AvatarProps> = ({ modelPaths, assetPaths, scene }) => {
     };
     
   }, [modelPaths, scene, glbLoader]);
-
   return (
     <>
       {assetPaths.map((path) => (

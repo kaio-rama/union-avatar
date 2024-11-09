@@ -9,23 +9,23 @@ import { useAssetContext } from './AssetContext';
 function Scene() {
   const { rendererRef, cameraRef, mountRef } = useRefs();
   const [scene, setScene] = useState<THREE.Scene | null>(null);
-
-  
-  // Estado para los paths de los modelos
-  const [modelPaths, setModelPaths] = useState<{ body: string; head: string }>({
+  const [modelPaths, setModelPaths] = useState<{ body: string; head: string }>({    // Model Paths State
     body: "/assets/body/v4_phr_female_UA_base.glb",
     head: "/assets/head/v3_0_head_female.glb",
   });
-  
-  // Estado para los paths de los assets de prendas de vestir (a partir del contexto)
-  const [asset, setAsset] = useState<{ assets: string[] }>({
+  const { selectedAsset } = useAssetContext();
+  const [asset, setAsset] = useState<{ assets: string[] }>({    // Asset Paths State
     assets: [],
   });
-
-  const { selectedAsset } = useAssetContext();
-
-  // Resizing the canvas on window resize
-  useResizeHandler({ rendererRef, cameraRef });
+  // change the asset when the user selects a new one on the UI component
+  useEffect(() => {    
+    if (selectedAsset) {
+          setAsset({
+        assets: [selectedAsset],
+      });
+    }
+  }, [selectedAsset]); 
+  useResizeHandler({ rendererRef, cameraRef }); // Resizing the canvas on window resize
 
   // Set up the scene
   useEffect(() => {
@@ -35,29 +35,27 @@ function Scene() {
     const controls = new OrbitControls(camera, renderer.domElement);
     const floor = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.MeshStandardMaterial({ color: 0x21153a }));
 
-    // Set up the scene
+    // Set up the scene 
     scene.background = new THREE.Color(0x421b6c);
     floor.rotation.x = -Math.PI / 2;
-    floor.receiveShadow = true;
     scene.add(floor);
     renderer.setSize(window.innerWidth / 2, window.innerHeight);
-
-    if (mountRef.current) {
-      mountRef.current.appendChild(renderer.domElement);
-    }
-    controls.target.set(0, 1, 0)
-    camera.position.set(-1, 2, 4);
+    mountRef.current?.appendChild(renderer.domElement);
+    controls.target.set(0, 1, 0)  // Look at the center of the scene
+    camera.position.set(-1, 2.5, 3);    // Position the camera 
     rendererRef.current = renderer;
     cameraRef.current = camera;
     setScene(scene);
 
     // Lights & ambience
-    const ambientLight = new THREE.AmbientLight(0xffffff, .5);
-    const directionalLight = new THREE.DirectionalLight(0xfdfddf, 3);
-    directionalLight.position.set(1, 1, 1).normalize();
-    directionalLight.castShadow = true;
-    scene.add(directionalLight, ambientLight);
-    scene.fog = new THREE.Fog(0x421b6f, 1, 15);
+    const keyLight = new THREE.DirectionalLight(0x5adddf, 3);     // Keylight
+    keyLight.position.set(3, 2, 2);
+    const fillLight = new THREE.DirectionalLight(0xc25cc4, 1.5);  // Filllight
+    fillLight.position.set(-5, -3, -1);
+    const backLight = new THREE.DirectionalLight(0xac4fff, 3.5);  // Backlight
+    backLight.position.set(3, -2, -2);
+    scene.add(keyLight, fillLight, backLight);
+    scene.fog = new THREE.Fog(0x421b6a, 1, 15);  // A little fog to make it look nicer
 
     // Render Loop
     const animate = () => {
@@ -65,10 +63,9 @@ function Scene() {
       renderer.render(scene, camera);
     };
     animate();
-
     controls.update();
 
-    // Switching bodys
+    // Switching bodys paths
     document.getElementById('mujer')?.addEventListener('click', () => {
       setModelPaths({
         body: "/assets/body/v4_phr_female_UA_base.glb",
@@ -83,22 +80,10 @@ function Scene() {
     });
 
     // Clean up the scene when the component unmounts
-    return () => {
-      if (mountRef.current) {
-        mountRef.current.removeChild(renderer.domElement);
-      }
-    };
-  }, [rendererRef, mountRef]);
+    return () => {mountRef.current?.removeChild(renderer.domElement); console.log('Cleaning up the scene...')};
 
-  // Actualiza el estado 'asset' cuando 'selectedAsset' cambia
-  useEffect(() => {
-    if (selectedAsset) {
-      // Aquí puedes modificar los paths de los assets de acuerdo con el asset seleccionado
-      setAsset({
-        assets: [selectedAsset], // Puedes modificar esta lógica para agregar más assets
-      });
-    }
-  }, [selectedAsset, modelPaths.body, modelPaths.head]); // Dependencias del efecto
+
+  }, [rendererRef, mountRef, cameraRef]);
 
   return (
     <div ref={mountRef}>

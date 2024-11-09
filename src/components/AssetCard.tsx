@@ -40,30 +40,25 @@ export default function AssetCard({ path, category, currentCategory }: AssetCard
       (gltf) => {
         const model = gltf.scene;
     
-        // Check if children[0] and children[0].children[0] exist before accessing the name
         // This is to handle the differents scales and positions for small elements
         if (model.children[0] && model.children[0].children[0]) {
           const name = model.children[0].children[0].name;
-
+          
+          // Not the best implementation, but it was kind of fast to make it work...
           switch (true) {
             case name.toLowerCase().includes("acs"):
-              model.scale.set(1.3, 1.3, 1.3); // Default scale for these names
-              model.position.set(0, -2.5, 0); // Position adjustment for these names
+              model.scale.set(1.3, 1.3, 1.3); 
+              model.position.set(0, -2.5, 0); 
               break;
-
 
             case name.toLowerCase().includes("hair"):
-              model.scale.set(1.0, 1.0, 1.0); // Larger scale for these names
-              model.position.set(0, 0, 0); // Position adjustment for these names
+              model.scale.set(1.0, 1.0, 1.0); 
+              model.position.set(0, 0, 0); 
               break;
-    
-            default:
-              model.scale.set(0.5, 0.5, 0.5); // Default scale for other elements
-              model.position.set(0, -.5, 0); // Common position adjustment
           }
         } else if (model.children[0] && model.children[0].name.toLowerCase().includes("shoes")) {
-              model.scale.set(1.2, 1.2, 1.2); // Default scale for these names
-              model.position.set(0, 0, 0); // Position adjustment for these names
+              model.scale.set(1.2, 1.2, 1.2); 
+              model.position.set(0, 0, 0); 
 
         } else {
           // Default scale if the hierarchy does not match

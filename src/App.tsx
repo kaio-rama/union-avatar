@@ -8,7 +8,7 @@ import UI from './components/UI'
 function App() {
   return (
     <AssetProvider>
-        <Navbar style={{backgroundColor: '#111', color: 'white', position: 'fixed', top: 0, left: 0, width: '100%'}} />
+        <Navbar />
         <div className='interface-container'>
           <Scene />
           <UI />
