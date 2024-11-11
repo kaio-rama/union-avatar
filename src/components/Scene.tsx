@@ -35,6 +35,7 @@ function Scene() {
     const renderer = new THREE.WebGLRenderer();
     const controls = new OrbitControls(camera, renderer.domElement);
     const floor = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), new THREE.MeshStandardMaterial({ color: 0x21153a }));
+    floor.name = 'floor';
 
     // Set up the scene 
     scene.background = new THREE.Color(0x421b6c);
@@ -80,25 +81,27 @@ function Scene() {
       });
     });
 
+    console.log(floor);
     // Download the scene using GLTFExporter
     document.getElementById('download')?.addEventListener('click', () => {
       if (scene) {
-        // Exlude the floor from the scene
-        const floorClone = scene.getObjectByName('floor'); // O el nombre que hayas asignado al objeto floor
+        const floorClone = scene.getObjectByName('floor');
         if (floorClone) {
-          scene.remove(floorClone);
+          scene.remove(floorClone);     // Exlude the floor from the scene
         }
 
         const exporter = new GLTFExporter();
-        exporter.parse(scene, (result) => {
-          const output = JSON.stringify(result, null, 2);
-          const blob = new Blob([output], { type: 'application/octet-stream' });
-          const link = document.createElement('a');
-          link.href = URL.createObjectURL(blob);
-          link.download = 'unionAvatar.glb';
-          link.click();
-        }, { binary: true });
-        
+        exporter.parse(
+          scene,
+          (result) => {
+            const output = JSON.stringify(result, null, 2);
+            const blob = new Blob([output], { type: 'application/octet-stream' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'unionAvatar.glb';
+            link.click();
+          }, { binary: true } as any);
+        ;    
         if (floorClone) {   // Adding the floor back to the scene
           scene.add(floorClone);
         }
@@ -107,7 +110,7 @@ function Scene() {
 
     // Clean up the scene when the component unmounts
     return () => {mountRef.current?.removeChild(renderer.domElement); console.log('Cleaning up the scene...')};
-
+    
   }, [rendererRef, mountRef, cameraRef]);
 
   return (
