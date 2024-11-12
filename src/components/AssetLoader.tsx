@@ -1,38 +1,26 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { useLoader } from '../hooks/useLoader';
-import { applyMetadata } from '../hooks/useMetadata';
+import { applyMetadata } from '../functions/applyMetadata';
+import { replaceExistingAsset } from '../functions/replaceExistingAsset';
 
 interface AssetProps {
   path: string;
   category: string;
-  avatarRef: React.MutableRefObject<THREE.Object3D | null>; // Reference to the Avatar
+  avatarRef: React.MutableRefObject<THREE.Object3D | null>;
   scene: THREE.Scene;
 }
 
-const Asset: React.FC<AssetProps> = ({ path, avatarRef, scene, category }) => {
+const AssetLoader: React.FC<AssetProps> = ({ path, avatarRef, scene, category }) => {
   const { glbLoader } = useLoader();
   const assetRef = useRef<THREE.Object3D | null>(null);
 
-  // Function to remove previous asset based on category
-  const removeExistingAsset = (
-    category: string,
-    avatar: THREE.Object3D | null
-  ) => {
-        if (!avatar) return;
-        if(avatar.children[avatar.children.length - 1].name === category) {
-          avatar.remove(avatar.children[avatar.children.length - 1]);
-          return;
-        }
-      }
-
   useEffect(() => {
-    // Name of the file without extension
-    const fileName = path.split('/').pop() || '';
-    const basePath = path.replace('.glb', '');
-    const jsonPath = `${basePath}.json`;
+    const fileName = path.split('/').pop() || ''; // Name of the file without extension
+    const basePath = path.replace('.glb', '');    // Base path of the asset (without extension)
+    const jsonPath = `${basePath}.json`;         // Path of the associated JSON file
 
-    // Load and add the asset to the scene
+    // Load the asset and set name as category
     glbLoader.load(
       path,
       (gltf) => {
@@ -40,7 +28,7 @@ const Asset: React.FC<AssetProps> = ({ path, avatarRef, scene, category }) => {
         assetRef.current.name = category;
 
       // Before adding the new asset, remove the existing one of the same category
-       removeExistingAsset(category, avatarRef.current);
+       replaceExistingAsset(category, avatarRef.current);
 
         // Try to load the associated JSON file
         fetch(jsonPath)
@@ -56,7 +44,7 @@ const Asset: React.FC<AssetProps> = ({ path, avatarRef, scene, category }) => {
           });
          
 
-        // Add the asset to the avatar or scene
+        // Add the asset to the avatar
         if (avatarRef.current) {
           // if the asset is a hair, set the position, sorry about this too..
           if (assetRef.current.name.toLowerCase().includes("hair")) {
@@ -71,19 +59,9 @@ const Asset: React.FC<AssetProps> = ({ path, avatarRef, scene, category }) => {
       }
     );
 
-    return () => {
-      // Clean up the asset from the scene
-      if (assetRef.current) {
-        if (avatarRef.current) {
-          avatarRef.current.remove(assetRef.current);
-        } else {
-          scene.remove(assetRef.current);
-        }
-      }
-    };
-  }, [removeExistingAsset, applyMetadata, category, scene, assetRef, glbLoader, path]);
+  }, [category, scene, assetRef, glbLoader, path, avatarRef]);
 
   return null;
 };
 
-export default Asset;
+export default AssetLoader;

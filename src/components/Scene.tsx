@@ -6,6 +6,9 @@ import useResizeHandler from '../hooks/useResizeHandler';
 import { useRefs } from '../hooks/useRefs';
 import { useAssetContext } from './AssetContext';
 import { GLTFExporter } from 'three/examples/jsm/Addons.js';
+import { setLightsUp } from '../functions/setLightsUp';
+import { useLight } from '../hooks/useLight';
+import { downloadScene } from '../functions/downloadScene';
 
 function Scene() {
   const { rendererRef, cameraRef, mountRef } = useRefs();
@@ -15,6 +18,7 @@ function Scene() {
     head: "/assets/head/v3_0_head_female.glb",
   });
   const { selectedAsset } = useAssetContext();
+  const { currentLight, changeLight } = useLight(scene); // UseLights.ts
   const [asset, setAsset] = useState<{ assets: string[] }>({    // Asset Paths State
     assets: [],
   });
@@ -44,20 +48,14 @@ function Scene() {
     renderer.setSize(window.innerWidth / 2, window.innerHeight);
     mountRef.current?.appendChild(renderer.domElement);
     controls.target.set(0, 1, 0)  // Look at the center of the scene
-    camera.position.set(-1, 2.5, 3);    // Position the camera 
+    camera.position.set(0, 1.26, 3);    // Position the camera 
     rendererRef.current = renderer;
     cameraRef.current = camera;
     setScene(scene);
 
     // Lights & ambience
-    const keyLight = new THREE.DirectionalLight(0x5adddf, 3);     // Keylight
-    keyLight.position.set(3, 2, 2);
-    const fillLight = new THREE.DirectionalLight(0xc25cc4, 1.5);  // Filllight
-    fillLight.position.set(-5, -3, -1);
-    const backLight = new THREE.DirectionalLight(0xac4fff, 3.5);  // Backlight
-    backLight.position.set(3, -2, -2);
-    scene.add(keyLight, fillLight, backLight);
-    scene.fog = new THREE.Fog(0x421b6a, 1, 15);  // A little fog to make it look nicer
+    setLightsUp({ scene, color: currentLight });
+    document.getElementById('changeLights')?.addEventListener('click', changeLight);
 
     // Render Loop
     const animate = () => {
@@ -81,32 +79,11 @@ function Scene() {
       });
     });
 
-    console.log(floor);
     // Download the scene using GLTFExporter
     document.getElementById('download')?.addEventListener('click', () => {
-      if (scene) {
-        const floorClone = scene.getObjectByName('floor');
-        if (floorClone) {
-          scene.remove(floorClone);     // Exlude the floor from the scene
-        }
-
-        const exporter = new GLTFExporter();
-        exporter.parse(
-          scene,
-          (result) => {
-            const output = JSON.stringify(result, null, 2);
-            const blob = new Blob([output], { type: 'application/octet-stream' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'unionAvatar.glb';
-            link.click();
-          }, { binary: true } as any);
-        ;    
-        if (floorClone) {   // Adding the floor back to the scene
-          scene.add(floorClone);
-        }
-      }
+    downloadScene(scene);
     });
+    
 
     // Clean up the scene when the component unmounts
     return () => {mountRef.current?.removeChild(renderer.domElement); console.log('Cleaning up the scene...')};

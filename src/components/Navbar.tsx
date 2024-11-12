@@ -7,6 +7,7 @@ export default function Navbar() {
 }
 
 const style: React.CSSProperties = {
+  position: 'absolute',
   background: 'linear-gradient(to left, #2C193599, #393263AC)',
   textShadow: '#0CD 0px 0 3px', 
   color: '#A5A',

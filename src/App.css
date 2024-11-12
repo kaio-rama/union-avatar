@@ -4,9 +4,9 @@ body {
 
 .ui-container {
     position: absolute;
-    bottom: 0;
-    width: 100%;
-    background-color: transparent;
+    bottom: 15px;
+    left: 15px;
+    width: 50%;
 }
 
 button {
@@ -37,10 +37,20 @@ button {
     background-color: #3333335c;
 }
 
+.lights-button {
+    background-color: #dd1e7a59;
+    color: white;
+    height: 50px;
+    width: 150px;
+    cursor: pointer;
+    border: none;
+  }
+
+  .lights-button:hover {
+    background-color: #dd1e7a99;
+  }
+
 .download-button {
-    position: absolute;
-    bottom: 50px;
-    right: 80px;
     background-color: #32ac3259;
     color: white;
     height: 50px;
@@ -51,4 +61,20 @@ button {
 
 .download-button:hover {
     background-color: #32ac3299;
+}
+
+@media (max-width: 1000px) {    
+    .interface-container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        
+    }
+
+    .ui-container {
+        width: 90%;
+
+    }
+    
+    
 }

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import Asset from './Assets'; // Importar el componente Asset
+import AssetLoader from './AssetLoader'; // Importar el componente Asset
 import { useLoader } from '../hooks/useLoader';
 
 interface AvatarProps {
@@ -24,6 +24,7 @@ const Avatar: React.FC<AvatarProps> = ({ modelPaths, assetPaths, scene }) => {
     glbLoader.load(
       modelPaths.body,
       (gltf) => {
+        // Saving the body model in the avatarRef and the position of the head
         avatarRef.current = gltf.scene.children[1];
         const positionx = gltf.scene.children[0].position.x;
         const positiony = gltf.scene.children[0].position.y;
@@ -36,7 +37,6 @@ const Avatar: React.FC<AvatarProps> = ({ modelPaths, assetPaths, scene }) => {
             const head = gltf.scene;
             head.position.set(positionx, positiony, positionz);
             avatarRef.current?.add(head);
-
             // Adding Avatar to the scene
             if (avatarRef.current) {
               scene.add(avatarRef.current);
@@ -65,7 +65,7 @@ const Avatar: React.FC<AvatarProps> = ({ modelPaths, assetPaths, scene }) => {
   return (
     <>
       {assetPaths.map((path) => (
-        <Asset key={path} path={path} category={path.split('/')[3]} avatarRef={avatarRef} scene={scene} />
+        <AssetLoader key={path} path={path} category={path.split('/')[3]} avatarRef={avatarRef} scene={scene} />
       ))}
     </>
   );
