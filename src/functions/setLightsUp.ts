@@ -34,7 +34,7 @@ export const setLightsUp = ({ scene, color }: SceneProps) => {
     backLightColor = 0x69CF79;
   }
 
-  // Crear las nuevas luces con los colores específicos
+  // Create lights with the specified colors
   const keyLight = new THREE.DirectionalLight(keyLightColor, 3);
   keyLight.position.set(3, 2, 2);
 
@@ -44,7 +44,7 @@ export const setLightsUp = ({ scene, color }: SceneProps) => {
   const backLight = new THREE.DirectionalLight(backLightColor, 3.5);
   backLight.position.set(3, -2, -2);
   
-  // Añadir las nuevas luces y la niebla a la escena
+
   scene.add(keyLight, fillLight, backLight);
-  scene.fog = new THREE.Fog(0x421b6a, 1, 15);  // Un poco de niebla para el efecto
+  scene.fog = new THREE.Fog(0x421b6a, 1, 15);  // Some fog to generate some ambience
 };

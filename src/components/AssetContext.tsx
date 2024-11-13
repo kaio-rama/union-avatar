@@ -11,6 +11,7 @@ interface AssetProviderProps {
 
 const AssetContext = createContext<AssetContextType | undefined>(undefined);
 
+// Provider component that provides the selectedAsset state and setSelectedAsset function
 export const AssetProvider = ({ children }: AssetProviderProps) => {
   const [selectedAsset, setSelectedAsset] = useState<string | null>(null);
   return (

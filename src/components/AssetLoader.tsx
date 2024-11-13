@@ -46,7 +46,7 @@ const AssetLoader: React.FC<AssetProps> = ({ path, avatarRef, scene, category })
 
         // Add the asset to the avatar
         if (avatarRef.current) {
-          // if the asset is a hair, set the position, sorry about this too..
+          // if the asset is a hair, set the position to (0, 1.7, -0.035)
           if (assetRef.current.name.toLowerCase().includes("hair")) {
               assetRef.current.position.set(0, 1.7, -0.035);
           }

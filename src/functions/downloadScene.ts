@@ -1,7 +1,6 @@
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 import * as THREE from 'three';
 
-// Interfaces para mayor legibilidad
 interface ExportOptions {
   binary: boolean;
 }
@@ -13,9 +12,9 @@ export const downloadScene = (scene: THREE.Scene | null) => {
       const avatar = scene.children[4];
       const exporter = new GLTFExporter();
       const options: ExportOptions = {
-        binary: true, // Correctamente tipado
+        binary: true, 
       };
-      // Definir la función de callback con un tipo adecuado
+      
       const onResult: ExportResultCallback = (result) => {
         let blob;
         if (options.binary && result instanceof ArrayBuffer) {
@@ -30,7 +29,7 @@ export const downloadScene = (scene: THREE.Scene | null) => {
         link.click();
       };
 
-      // Llamar a exporter.parse() con el tipo adecuado
+      // Can't find a proper Type for this ...
       exporter.parse(avatar, onResult, options as GLTFExporter.Options);
     }
 };

@@ -37,12 +37,12 @@ export default function UI() {
     if (pathsToLoad.length > 0) {
       const generateIndividualThumbnails = async () => {
         const generatedThumbnails: { [key: string]: string } = {};
-        // Generate a thumbnail (PNG) for each path
+        // Generate a thumbnail (PNG) for each path and store the thumbnail with its path as key-value pair
         for (const path of pathsToLoad) {
           if (!thumbnails[path]) { // Verify if the thumbnail for the path already exists
             try {
-              const { path: modelPath, image } = await generateThumbnail(path);  // Wait for the PNG to be generated for each path
-              generatedThumbnails[modelPath] = image;   // Store the thumbnail with its path
+              const { path: modelPath, image } = await generateThumbnail(path);
+              generatedThumbnails[modelPath] = image;
             } catch (error) {
               console.error(`Error al generar el thumbnail para ${path}:`, error);
             }
