@@ -19,7 +19,7 @@ export const setLightsUp = ({ scene, color }: SceneProps) => {
      backLightColor = 0xac4fff;;
   
   } else if (color === 'red') {
-    keyLightColor = 0xca32cd;
+    keyLightColor = 0xd5698D;
     fillLightColor = 0x32cdf2;
     backLightColor = 0xfc43a6;
 
@@ -29,9 +29,9 @@ export const setLightsUp = ({ scene, color }: SceneProps) => {
     backLightColor = 0xacc9ff;
 
   } else if (color === 'green') {
-    keyLightColor = 0xCC689D;
-    fillLightColor = 0x66af66;
-    backLightColor = 0x99ff99;
+    keyLightColor = 0x6DB8CD;
+    fillLightColor = 0x66AF66;
+    backLightColor = 0x69CF79;
   }
 
   // Crear las nuevas luces con los colores específicos

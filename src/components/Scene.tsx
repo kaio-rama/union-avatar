@@ -5,7 +5,6 @@ import Avatar from './Avatars';
 import useResizeHandler from '../hooks/useResizeHandler';
 import { useRefs } from '../hooks/useRefs';
 import { useAssetContext } from './AssetContext';
-import { GLTFExporter } from 'three/examples/jsm/Addons.js';
 import { setLightsUp } from '../functions/setLightsUp';
 import { useLight } from '../hooks/useLight';
 import { downloadScene } from '../functions/downloadScene';
@@ -81,6 +80,7 @@ function Scene() {
 
     // Download the scene using GLTFExporter
     document.getElementById('download')?.addEventListener('click', () => {
+      console.log(scene)
     downloadScene(scene);
     });
     

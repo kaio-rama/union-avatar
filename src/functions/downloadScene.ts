@@ -10,16 +10,11 @@ type ExportResultCallback = (result: ArrayBuffer | object) => void;
 
 export const downloadScene = (scene: THREE.Scene | null) => { 
     if (scene) {
-      const floorClone = scene.getObjectByName('floor');
-      if (floorClone) {
-        scene.remove(floorClone); // Excluye el piso de la escena
-      }
-
+      const avatar = scene.children[4];
       const exporter = new GLTFExporter();
       const options: ExportOptions = {
         binary: true, // Correctamente tipado
       };
-
       // Definir la función de callback con un tipo adecuado
       const onResult: ExportResultCallback = (result) => {
         let blob;
@@ -36,11 +31,6 @@ export const downloadScene = (scene: THREE.Scene | null) => {
       };
 
       // Llamar a exporter.parse() con el tipo adecuado
-      exporter.parse(scene, onResult, options as GLTFExporter.Options);
-
-      if (floorClone) {
-        // Agregar el piso de nuevo a la escena
-        scene.add(floorClone);
-      }
+      exporter.parse(avatar, onResult, options as GLTFExporter.Options);
     }
 };

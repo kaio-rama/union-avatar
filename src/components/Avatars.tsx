@@ -16,6 +16,7 @@ const Avatar: React.FC<AvatarProps> = ({ modelPaths, assetPaths, scene }) => {
   useEffect(() => {  
     // Clean up the previous avatar before loading a new one
     if (avatarRef.current) {
+      console.log('Cleaning up the previous avatar...');
       scene.remove(avatarRef.current);
       avatarRef.current = null;
     }
@@ -24,7 +25,7 @@ const Avatar: React.FC<AvatarProps> = ({ modelPaths, assetPaths, scene }) => {
     glbLoader.load(
       modelPaths.body,
       (gltf) => {
-        // Saving the body model in the avatarRef and the position of the head
+        // Saving the body model in the avatarRef and the position x,y,z of the head
         avatarRef.current = gltf.scene.children[1];
         const positionx = gltf.scene.children[0].position.x;
         const positiony = gltf.scene.children[0].position.y;
