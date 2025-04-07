@@ -30,6 +30,6 @@ export const downloadScene = (scene: THREE.Scene | null) => {
       };
 
       // Can't find a proper Type for this ...
-      exporter.parse(avatar, onResult, options as GLTFExporter.Options);
+      exporter.parse(avatar, onResult, options as any);
     }
 };
