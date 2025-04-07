@@ -1,0 +1,28 @@
+{
+  "deployment_data": {
+    "source_type": "default",
+    "place": "body"
+  },
+  "metadata": {
+    "body": {
+      "UnionAvatars_Neck": true,
+      "UnionAvatars_Chest": true,
+      "UnionAvatars_Belly": true,
+      "UnionAvatars_Hips": true,
+      "UnionAvatars_Arms_bottom": true,
+      "UnionAvatars_Arms_top": true,
+      "UnionAvatars_Hands": true,
+      "UnionAvatars_Legs_bottom": true,
+      "UnionAvatars_Legs_top": true,
+      "UnionAvatars_Feet": false
+    },
+    "version": "v3",
+    "style": "phr",
+    "gender": "male",
+    "position": "shoes",
+    "category": null,
+    "description": "sneakers_converse_black",
+    "dyeable": false,
+    "default_colors": [null]
+  }
+}

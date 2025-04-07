@@ -1,0 +1,29 @@
+{
+    "deployment_data": {
+        "source_type": "default",
+        "place": "body"
+    },
+    "metadata": {
+        "body":
+			{
+                "UnionAvatars_Neck": true, 
+                "UnionAvatars_Chest": false,
+                "UnionAvatars_Belly": false,
+                "UnionAvatars_Hips": true,
+                "UnionAvatars_Arms_bottom": false, 
+                "UnionAvatars_Arms_top": false, 
+                "UnionAvatars_Hands": true, 
+                "UnionAvatars_Legs_bottom": true,
+                "UnionAvatars_Legs_top": true, 
+                "UnionAvatars_Feet": true
+			},
+        "version": "v4",
+        "style": "phr",
+        "gender": "female",
+        "position": "top",
+        "category": "long",
+        "description": "v3_phr_female_UA_top_blazer_hitman_basic_blue",
+        "dyeable": false,
+        "default_colors": [null]
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "deployment_data": {
+        "source_type": "default",
+        "place": "body"
+    },
+    "metadata": {
+	"body": 
+		{
+			"UnionAvatars_Neck": true, 
+			"UnionAvatars_Chest": false,
+			"UnionAvatars_Belly": false,
+			"UnionAvatars_Hips": true,
+			"UnionAvatars_Arms_bottom": false, 
+			"UnionAvatars_Arms_top": false, 
+			"UnionAvatars_Hands": true, 
+			"UnionAvatars_Legs_bottom": true,
+			"UnionAvatars_Legs_top": true, 
+			"UnionAvatars_Feet": true
+		},
+	"version": "v3", 
+	"style": "phr", 
+	"gender": "male", 
+	"position": "top", 
+	"category": null, 
+	"description": "puffer_basic_hn_ls_of_blue",
+	"dyeable": true,
+	"default_colors": [null]
+}
+}
