@@ -1,0 +1,55 @@
+{
+    "garments": {
+      "accessories": [
+        "/assets/garments/acs/v4_phr_female_UA_accessories_glasses_hipster_black.glb",
+        "/assets/garments/acs/v4_phr_female_F3DF_accessories_mask_02.glb",
+        "/assets/garments/acs/v4_phr_female_UA_accessories_headphones_pioneer_black.glb",
+        "/assets/garments/acs/v4_phr_female_UA_accessories_headwear_bunny_ears.glb",
+        "/assets/garments/acs/v4_phr_male_F3DF_accessories_mask_02.glb", 
+        "/assets/garments/acs/v4_phr_male_UA_accessories_glasses_hipster_black.glb",
+        "/assets/garments/acs/v4_phr_male_UA_accessories_headphones_pioneer_black.glb",
+        "/assets/garments/acs/v4_phr_male_UA_accessories_headwear_bunny_ears.glb"
+      ],
+      "bottom": [
+        "/assets/garments/bottom/v3_phr_female_UA_bottom_pants_cargo_ll_of_darkgreen.glb",
+        "/assets/garments/bottom/v3_phr_female_UA_bottom_pants_formal_black.glb",
+        "/assets/garments/bottom/v3_phr_female_UA_bottom_pants_shorts_sl_black.glb",
+        "/assets/garments/bottom/v3_phr_male_UA_bottom_pants_cargo_ll_of_darkgreen.glb",
+        "/assets/garments/bottom/v3_phr_male_UA_bottom_pants_formal_black.glb",
+        "/assets/garments/bottom/v3_phr_male_UA_bottom_pants_shorts_sl_black.glb",
+        "/assets/garments/bottom/v4_phr_female_UA_bottom_skirt_mini_sl_sf_sky.glb",
+        "/assets/garments/bottom/v4_phr_male_UA_bottom_skirt_mini_sl_sf_sky.glb"
+      ],
+      "haistly" : [
+        "/assets/garments/hair/v4_phr_UA_haircards_04.glb",
+        "/assets/garments/hair/v4_phr_UA_haircards_08.glb",
+        "/assets/garments/hair/v4_phr_UA_haircards_12.glb",
+        "/assets/garments/hair/v4_phr_UA_haircards_14.glb",
+        "/assets/garments/hair/v4_phr_UA_polygonal_08.glb", 
+        "/assets/garments/hair/v4_phr_UA_polygonal_12.glb",
+        "/assets/garments/hair/v4_phr_UA_polygonal_16.glb",
+        "/assets/garments/hair/v4_phr_UA_polygonal_18.glb"
+      ],
+      "shoes": [
+        "/assets/garments/shoes/v3_phr_female_UA_shoes_sandals_birkenstock_black.glb", 
+        "/assets/garments/shoes/v3_phr_female_UA_shoes_sneakers_airForce_white.glb",  
+        "/assets/garments/shoes/v3_phr_female_UA_shoes_sneakers_converse_black.glb",  
+        "/assets/garments/shoes/v3_phr_female_UA_shoes_sneakers_yeezy_darkgrey.glb", 
+        "/assets/garments/shoes/v3_phr_male_UA_shoes_sandals_birkenstock_black.glb", 
+        "/assets/garments/shoes/v3_phr_male_UA_shoes_sneakers_airForce_white.glb",  
+        "/assets/garments/shoes/v3_phr_male_UA_shoes_sneakers_converse_black.glb", 
+        "/assets/garments/shoes/v3_phr_male_UA_shoes_sneakers_yeezy_darkgrey.glb"
+      ],
+      "top": [
+        "/assets/garments/top/v3_phr_female_UA_top_blazer_hitman_basic_blue.glb", 
+        "/assets/garments/top/v3_phr_female_UA_top_hoodie_kangaroo_ls_UA.glb", 
+        "/assets/garments/top/v3_phr_female_UA_top_puffer_basic_hn_ls_of_blue.glb",  
+        "/assets/garments/top/v3_phr_female_UA_top_shirt_basic_ss_white.glb",
+        "/assets/garments/top/v3_phr_male_UA_top_blazer_hitman_basic_blue.glb",  
+        "/assets/garments/top/v3_phr_male_UA_top_hoodie_kangaroo_ls_UA.glb", 
+        "/assets/garments/top/v3_phr_male_UA_top_puffer_basic_hn_ls_of_blue.glb", 
+        "/assets/garments/top/v3_phr_male_UA_top_shirt_basic_ss_white.glb"
+      ]
+    }
+  }
+  
